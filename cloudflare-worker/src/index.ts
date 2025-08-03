@@ -17,3 +17,5 @@ export default {
     return searx.fetch(request);
   }
 };
+
+export { SearxngContainer };

@@ -1,6 +1,15 @@
-name = "searxng-worker"
+name = "searxng-docker"
 main = "src/index.ts"
 compatibility_date = "2025-08-03"
+
+[durable_objects]
+bindings = [
+  { name = "SEARXNG", class_name = "SearxngContainer" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["SearxngContainer"]
 
 [[containers]]
 name = "searxng"
@@ -11,5 +20,4 @@ image = "ghcr.io/searxng/searxng:latest"
 # https://developers.cloudflare.com/containers/platform-details/
 instance_type = "basic"
 max_instances = 1
-sleep_after = "5m"
 
