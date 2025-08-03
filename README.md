@@ -103,3 +103,17 @@ git pull
 docker-compose pull
 docker-compose up -d
 ```
+
+## Deploy on Cloudflare Workers
+
+A Cloudflare Container configuration is available in the `cloudflare-worker/` directory. It builds a SearxNG container image and
+exposes it through a Cloudflare Worker.
+
+```bash
+cd cloudflare-worker
+npm install
+npm run cf-typegen
+npm run deploy
+```
+
+The worker forwards incoming requests to the SearxNG instance running in the container.
