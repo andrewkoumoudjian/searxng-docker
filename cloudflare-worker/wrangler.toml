@@ -1,6 +1,15 @@
-name = "searxng-worker"
+name = "searxng-docker"
 main = "src/index.ts"
 compatibility_date = "2025-08-03"
+
+[durable_objects]
+bindings = [
+  { name = "SEARXNG", class_name = "SearxngContainer" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["SearxngContainer"]
 
 [[containers]]
 name = "searxng"
