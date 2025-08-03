@@ -26,4 +26,8 @@ Deploy the worker and container to Cloudflare:
 npm run deploy
 ```
 
+Wrangler reads GitHub Container Registry credentials from the
+`GHCR_USERNAME` and `GHCR_TOKEN` environment variables defined in
+`wrangler.toml`.
+
 The worker forwards all requests to the SearxNG container. Configuration files in the `searxng/` directory are copied into the container at build time.
