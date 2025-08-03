@@ -1,23 +1,23 @@
-name = "searxng-docker"
+name = "searxng-worker"
 main = "src/index.ts"
-compatibility_date = "2025-08-03"
+compatibility_date = "2025-08-01"
 
 [durable_objects]
-bindings = [
-  { name = "SEARXNG", class_name = "SearxngContainer" }
-]
+bindings = [{ name = "SEARXNG", class_name = "SearxngContainer" }]
 
 [[migrations]]
 tag = "v1"
 new_classes = ["SearxngContainer"]
 
 [[containers]]
-name = "searxng"
-class_name = "SearxngContainer"
-image = "ghcr.io/searxng/searxng:latest"
-# The default dev class only provides 256 MiB RAM.
-# SearxNG needs ~300 MiB, so use "basic" (1 GiB RAM / ¼ vCPU / 4 GB disk).
-# https://developers.cloudflare.com/containers/platform-details/
-instance_type = "basic"
-max_instances = 1
+# The Durable-Object class that represents a container instance
+class_name   = "SearxngContainer"
+
+# Image now lives in Cloudflare’s registry
+image        = "registry.cloudflare.com/<account>/searxng:latest"
+
+# Keep at least one warm copy; drop the line entirely to autoscale
+instances    = 1
+# Optional: stop if idle
+# sleep_after = "10m"
 

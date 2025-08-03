@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM searxng/searxng:latest
+FROM ghcr.io/searxng/searxng:latest
 
 # Copy SearxNG configuration into the image
 COPY searxng /etc/searxng
