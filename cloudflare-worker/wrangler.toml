@@ -1,0 +1,12 @@
+name = "searxng-worker"
+main = "src/index.ts"
+compatibility_date = "2025-08-03"
+
+[[containers]]
+name = "searxng"
+class_name = "SearxngContainer"
+image = "ghcr.io/searxng/searxng:latest"
+instance_type = "basic"
+max_instances = 1
+sleep_after = "5m"
+
