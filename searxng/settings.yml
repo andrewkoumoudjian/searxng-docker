@@ -1,9 +1,34 @@
 # see https://docs.searxng.org/admin/settings/settings.html#settings-use-default-settings
 use_default_settings: true
+
 server:
-  # base_url is defined in the SEARXNG_BASE_URL environment variable, see .env and docker-compose.yml
-  secret_key: "ultrasecretkey"  # change this!
-  limiter: false  # enable this when running the instance for a public usage on the internet
+  secret_key: "565c4668bb7f4177e27c627810adeb3a900451a1f2b2d3ba9f465e960d427010"  # Generate with: openssl rand -hex 32
+  limiter: true  # Enable rate limiting for public usage
   image_proxy: true
+  bind_address: "0.0.0.0:8080"
+
+search:
+  formats:
+    - html
+    - json  # Enable JSON API responses
+
 redis:
-  url: redis://redis:6379/0
+  url: redis://${{Valkey.RAILWAY_PRIVATE_DOMAIN}}:6379/0
+
+engines:
+  # Disable problematic engines
+  - name: google
+    disabled: true
+  
+  # Enable reliable alternatives
+  - name: brave
+    disabled: false
+  
+  - name: duckduckgo
+    disabled: false
+  
+  - name: bing
+    disabled: false
+  
+  - name: qwant
+    disabled: false
